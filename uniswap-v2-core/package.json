@@ -1,0 +1,62 @@
+{
+  "name": "@uniswap/v2-core",
+  "description": "🎛 Core contracts for the UniswapV2 protocol",
+  "version": "1.0.1",
+  "homepage": "https://uniswap.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Uniswap/uniswap-v2-core"
+  },
+  "keywords": [
+    "uniswap",
+    "ethereum",
+    "v2",
+    "core",
+    "uniswap-v2"
+  ],
+  "files": [
+    "contracts",
+    "build"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "devDependencies": {
+    "@eth-optimism/solc": "0.5.16-alpha.7",
+    "@types/chai": "^4.2.6",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "ethereum-waffle": "^3.2.2",
+    "ethereumjs-util": "^6.2.0",
+    "mocha": "^6.2.2",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.0",
+    "solc": "0.5.16",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3"
+  },
+  "scripts": {
+    "lint": "yarn prettier ./test/*.ts --check",
+    "lint:fix": "yarn prettier ./test/*.ts --write",
+    "clean": "rimraf ./build/",
+    "precompile:evm": "yarn clean",
+    "precompile:nvm": "yarn clean",
+    "compile:evm": "waffle .waffle.json",
+    "compile:nvm": "waffle .waffle-nvm.json",
+    "pretest:evm": "yarn compile:evm",
+    "pretest:nvm": "yarn compile:nvm",
+    "test:evm": "mocha",
+    "test:nvm": "export MODE=NVM && mocha",
+    "prepublishOnly": "yarn test:evm && yarn test:nvm",
+    "deploy:nvm": "npx hardhat run --network nahmii scripts/deploy.js"
+  },
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@eth-optimism/hardhat-ovm": "^0.2.3",
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "dotenv": "^10.0.0",
+    "glob": "^7.1.7",
+    "hardhat": "^2.6.1"
+  }
+}
