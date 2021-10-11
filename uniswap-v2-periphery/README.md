@@ -33,6 +33,8 @@ NVM compiler:
 
 ## Deploy
 
+NOTE: Prior to deploying, make sure to add a correct `FACTORY_ADDRESS` to the `.env` file. If you don't have one, please deploy the core smart contracts first and retrieve the factory address.
+
 Deploy to the live Nahmii Ropsten network:
 `yarn deploy:nvm`
 

@@ -3,6 +3,7 @@
 //
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
+require('dotenv').config();
 const hre = require("hardhat");
 
 async function main() {
@@ -22,7 +23,7 @@ async function main() {
     const wETH = "0x4200000000000000000000000000000000000006";
 
     // Factory address
-    const factory = "0x01a2aB72dd3A49700CFea8b87e9E6ba7Dfb64809";
+    const factory = process.env.FACTORY_ADDRESS;
 
     // Deploy router
     const router = await hre.ethers.getContractFactory('UniswapV2Router02');
