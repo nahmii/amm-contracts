@@ -28,5 +28,5 @@ The `core` project contains the main file to be deployed, the `UniswapV2Factory`
 
 ### Nahmii Testnet
 
-Factory: 0x238AE0a8bDFf3d03B328Af85fD7fdf570Fee8819
-Router02: 0x31965F4782743be64CD3868f4Bc6843b82273feB
+- Factory: 0x238AE0a8bDFf3d03B328Af85fD7fdf570Fee8819
+- Router02: 0x31965F4782743be64CD3868f4Bc6843b82273feB
