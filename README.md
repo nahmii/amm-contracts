@@ -25,3 +25,8 @@ This repository contains 2 different solidity projects with two different compil
 The `core` project contains the main file to be deployed, the `UniswapV2Factory` contract. The `periphery` project contains the `UniswapV2Router02` contract, which is required for routing swaps and liquidity actions between pairs. There are flattened files available for both contracts too.
 
 ## Deployed contracts
+
+### Nahmii Testnet
+
+Factory: 0x238AE0a8bDFf3d03B328Af85fD7fdf570Fee8819
+Router02: 0x31965F4782743be64CD3868f4Bc6843b82273feB
