@@ -4,7 +4,7 @@
 const { ethers } = require("hardhat");
 let pair;
 try {
-    pair = require('../build/UniswapV2Pair.json')
+    pair = require('../artifacts-ovm/contracts/UniswapV2Pair.sol/UniswapV2Pair.json')
 } catch (error) {
     if (error.code == "MODULE_NOT_FOUND") {
         console.error("Please compile the smart contracts first by running `yarn compile:nvm`.");
@@ -14,9 +14,9 @@ try {
 
 async function main() {
     // Retrieve the bytecode from the V2Pair metadata
-    const bytecode = pair["evm"]["bytecode"]["object"];
+    const bytecode = pair["bytecode"];
     // Calculate the KECCAK256 hash for the given bytecode.
-    const COMPUTED_INIT_CODE_HASH = ethers.utils.keccak256(`0x${bytecode}`);
+    const COMPUTED_INIT_CODE_HASH = ethers.utils.keccak256(`${bytecode}`);
     console.log(`INIT_CODE_HASH: ${COMPUTED_INIT_CODE_HASH}`);
 }
 
