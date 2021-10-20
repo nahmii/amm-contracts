@@ -3,7 +3,6 @@ require('dotenv').config();
 
 const config = {
   l2Url: process.env.L2_URL || 'http://127.0.0.1:8545',
-  l1Url: process.env.L1_URL || 'http://127.0.0.1:9545',
   privateKey: process.env.PRIVATE_KEY,
   chainId: ethers.BigNumber.from(process.env.CHAIN_ID || 555)
 }

@@ -12,12 +12,12 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
     }
 });
 
-const accounts = []
+let accounts
 if (process.env.MNEMONIC) {
-    accounts.push({ mnemonic: process.env.MNEMONIC })
+    accounts = { mnemonic: process.env.MNEMONIC }
 }
 else {
-    accounts.push(process.env.PRIVATE_KEY)
+    accounts = [process.env.PRIVATE_KEY]
 }
 
 /**
