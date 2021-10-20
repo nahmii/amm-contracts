@@ -12,8 +12,13 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
     }
 });
 
-// You need to export an object to set up your config
-// Go to https://hardhat.org/config/ to learn more
+const accounts = []
+if (process.env.MNEMONIC) {
+    accounts.push({ mnemonic: process.env.MNEMONIC })
+}
+else {
+    accounts.push(process.env.PRIVATE_KEY)
+}
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
@@ -30,8 +35,8 @@ module.exports = {
     },
     networks: {
         nahmii: {
-            url: 'https://l2.testnet.nahmii.io/',
-            accounts: { mnemonic: process.env.MNEMONIC },
+            url: process.env.L2_URL,
+            accounts,
             gasPrice: 15000000,
             gas: 9000000,
             ovm: true

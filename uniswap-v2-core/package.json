@@ -38,11 +38,11 @@
   "scripts": {
     "lint": "yarn prettier ./test/*.ts --check",
     "lint:fix": "yarn prettier ./test/*.ts --write",
-    "clean": "rimraf ./build/",
+    "clean": "rimraf ./build/ ./artifacts-ovm/",
     "precompile:evm": "yarn clean",
     "precompile:nvm": "yarn clean",
     "compile:evm": "waffle .waffle.json",
-    "compile:nvm": "waffle .waffle-nvm.json",
+    "compile:nvm": "hardhat compile --network nahmii",
     "pretest:evm": "yarn compile:evm",
     "pretest:nvm": "yarn compile:nvm",
     "test:evm": "mocha",
