@@ -42,8 +42,22 @@ export async function v2Fixture([wallet]: Wallet[], provider: any): Promise<V2Fi
   
   const WETHPartner = await deploy(wallet, ERC20, [expandTo18Decimals(10000)])
   // deploy V2
-  const factoryV2 = await deploy(wallet, UniswapV2Factory, [wallet.address])
-  
+  let factoryV2
+  if (process.env.FACTORY_ADDRESS) {
+    factoryV2 = new Contract(
+      process.env.FACTORY_ADDRESS, 
+      JSON.stringify(UniswapV2Factory.abi), 
+      provider
+    ).connect(wallet)
+
+    console.log('Reuse factory address:', factoryV2.address)
+  }
+  else {
+    factoryV2 = await deploy(wallet, UniswapV2Factory, [wallet.address])
+
+    console.log('Deployed factory:', factoryV2.address)
+  }
+
   // deploy routers
   const router02 = await deploy(wallet, UniswapV2Router02, [factoryV2.address, WETH.address])
 
