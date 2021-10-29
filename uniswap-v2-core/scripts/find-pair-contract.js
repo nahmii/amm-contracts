@@ -4,9 +4,9 @@ const { ethers } = require("hardhat");
 // The order of the tokens matters. In V2 pairs, the smaller hex number is always first.
 const token0 = "0x7c8155909cd385F120A56eF90728dD50F9CcbE52";
 const token1 = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
-const FACTORY_ADDRESS = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f";
+const FACTORY_ADDRESS = "0x11AB0Ca40B2E9Bf2c98718539cA1aD7486999E57";
 // To generate an INIT_CODE_HASH, see the `generate-init-code-hash.js` script.
-const INIT_CODE_HASH = "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f";
+const INIT_CODE_HASH = "0x0afcd21f90e27818df9c484881aac8a20b869cbd86156c655d2020ef6950a5ba";
 
 async function main() {
     const pairAddress = ethers.utils.getCreate2Address(
