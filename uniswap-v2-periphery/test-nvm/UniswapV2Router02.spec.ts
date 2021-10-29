@@ -15,7 +15,7 @@ const overrides = {
   gasLimit: 0
 }
 
-describe('UniswapV2Router02', () => {
+describe('NiiFiV1Router02', () => {
   //@ts-ignore
   const [wallet] = provider.getWallets()
 

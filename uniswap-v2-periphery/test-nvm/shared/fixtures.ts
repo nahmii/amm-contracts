@@ -7,7 +7,7 @@ import INiiFiV1Pair from '../../../uniswap-v2-core/artifacts-ovm/contracts/NiiFi
 
 import ERC20 from '../../artifacts-ovm/contracts/test/ERC20.sol/ERC20.json'
 import WETH9 from '../../artifacts-ovm/contracts/test/WETH9.sol/WETH9.json'
-import UniswapV2Router02 from '../../artifacts-ovm/contracts/UniswapV2Router02.sol/UniswapV2Router02.json'
+import NiiFiV1Router02 from '../../artifacts-ovm/contracts/NiiFiV1Router02.sol/NiiFiV1Router02.json'
 import RouterEventEmitter from '../../artifacts-ovm/contracts/test/RouterEventEmitter.sol/RouterEventEmitter.json'
 
 interface V2Fixture {
@@ -59,7 +59,7 @@ export async function v2Fixture([wallet]: Wallet[], provider: any): Promise<V2Fi
   }
 
   // deploy routers
-  const router02 = await deploy(wallet, UniswapV2Router02, [factoryV2.address, WETH.address])
+  const router02 = await deploy(wallet, NiiFiV1Router02, [factoryV2.address, WETH.address])
 
   // event emitter for testing
   const routerEventEmitter = await deploy(wallet, RouterEventEmitter, [])
