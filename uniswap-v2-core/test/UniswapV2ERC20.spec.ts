@@ -19,7 +19,7 @@ chai.use(solidity)
 const TOTAL_SUPPLY = expandTo18Decimals(10000)
 const TEST_AMOUNT = expandTo18Decimals(10)
 
-describe('UniswapV2ERC20', () => {
+describe('NiiFiV1ERC20', () => {
   const [wallet, other] = provider.getWallets()
 
   let token: Contract

@@ -4,7 +4,7 @@
 const { ethers } = require("hardhat");
 let pair;
 try {
-    pair = require('../artifacts-ovm/contracts/UniswapV2Pair.sol/UniswapV2Pair.json')
+    pair = require('../artifacts-ovm/contracts/NiiFiV1Pair.sol/NiiFiV1Pair.json')
 } catch (error) {
     if (error.code == "MODULE_NOT_FOUND") {
         console.error("Please compile the smart contracts first by running `yarn compile:nvm`.");

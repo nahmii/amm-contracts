@@ -23,7 +23,7 @@ async function main() {
     const wETH = "0x4200000000000000000000000000000000000006";
 
     // Deploy factory
-    const factory = await hre.ethers.getContractFactory('UniswapV2Factory');
+    const factory = await hre.ethers.getContractFactory('NiiFiV1Factory');
     const factoryInstance = await factory.deploy(deployerAddress);
     await factoryInstance.deployed();
 
