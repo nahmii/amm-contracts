@@ -26,7 +26,7 @@ async function main() {
     const factory = process.env.FACTORY_ADDRESS;
 
     // Deploy router
-    const router = await hre.ethers.getContractFactory('UniswapV2Router02');
+    const router = await hre.ethers.getContractFactory('NiiFiV1Router02');
     const routerInstance = await router.deploy(factory, wETH);
     await routerInstance.deployed();
 
