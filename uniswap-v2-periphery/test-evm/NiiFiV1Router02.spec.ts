@@ -18,7 +18,7 @@ const overrides = {
   gasLimit: 9999999
 }
 
-describe('UniswapV2Router02', () => {
+describe('NiiFiV1Router02', () => {
   const [wallet] = provider.getWallets()
   const loadFixture = createFixtureLoader([wallet], provider)
 
