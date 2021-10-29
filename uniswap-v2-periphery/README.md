@@ -31,6 +31,12 @@ EVM compiler:
 NVM compiler:
 `yarn test:nvm`
 
+`yarn test:nvm` tests against a nahmii instance, either local or the testnet cluster. So please make sure the environment variables are set properly in the `.env` file. To test against the remote testnet, please set L2_URL to _https://l2.testnet.nahmii.io_ and CHAIN_ID to _5553_.
+
+Keep in mind that the remote testnet would require your test wallet address, corresponding to the PRIVATE_KEY or MNEMONIC environment variables, to be whitelisted in order to deploy contracts. 
+
+Also note that the address of deployed `UniswapV2Factory` has to be whitelisted, as this contract will need to deploy `UniswapV2Pair` contract when creating a pair. You can set the `FACTORY_ADDRESS` to the one that has been whitelisted.
+
 ## Deploy
 
 NOTE: Prior to deploying, make sure to add a correct `FACTORY_ADDRESS` to the `.env` file. If you don't have one, please deploy the core smart contracts first and retrieve the factory address.
