@@ -8,7 +8,9 @@ This repository contains both the NiiFi uniswap forked v2-core and v2-periphery 
 - Compiler options for both the EVM and the NVM.
 - Updated WETH9 smart contract to work with the NVM.
 - Hardhat integration.
-- Deploy scripts for the Nahmii Ropsten network.
+- Deploy scripts for the Nahmii Testnet network.
+- Updated pair parameters. 
+- Updated error strings.
 
 ## Requirements
 
