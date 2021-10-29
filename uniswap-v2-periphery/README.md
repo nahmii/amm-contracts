@@ -35,7 +35,7 @@ NVM compiler:
 
 Keep in mind that the remote testnet would require your test wallet address, corresponding to the PRIVATE_KEY or MNEMONIC environment variables, to be whitelisted in order to deploy contracts. 
 
-Also note that the address of deployed `UniswapV2Factory` has to be whitelisted, as this contract will need to deploy `UniswapV2Pair` contract when creating a pair. You can set the `FACTORY_ADDRESS` to the one that has been whitelisted.
+Also note that the address of deployed `NiiFiV1Factory` has to be whitelisted, as this contract will need to deploy `NiiFiV1Pair` contract when creating a pair. You can set the `FACTORY_ADDRESS` to the one that has been whitelisted.
 
 ## Deploy
 
