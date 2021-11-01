@@ -24,7 +24,9 @@ This repository contains 2 different solidity projects with two different compil
 - uniswap-v2-core -> Solidity 0.5.16
 - uniswap-v2-periphery -> Solidity 0.6.12
 
-The `core` project contains the main file to be deployed, the `NiiFiV1Factory` contract. The `periphery` project contains the `NiiFiV1Router02` contract, which is required for routing swaps and liquidity actions between pairs. There are flattened files available for both contracts too.
+The `core` project contains the main file to be deployed, the `NiiFiV1Factory` contract. The `periphery` project contains the `NiiFiV1Router02` contract, which is required for routing swaps and liquidity actions between pairs. 
+
+The `NiiFiV1Library` contract depends on the hash of the `NiiFiV1Pair` contract. This hash can be different based on the Solidity version and number of optimization runs used. To generate a new hash code for your specific target, compile the contracts and run the `generate-init-code-hash` script that can be found in the core contracts scripts folder.
 
 ## Deployed contracts
 
@@ -37,3 +39,6 @@ The `core` project contains the main file to be deployed, the `NiiFiV1Factory` c
 - NUSD: 0xab151cD390C6b0eB41A4a45E1E372972C3067b1a
 - NEURO-NUSD pair: 0x136ff75c58BAa3c30d282fBbFaEC4A5C9A4B0226
 - NEURO-ETH pair: 0x1450f8e037D7275ed2aE467af356603521251a13 
+
+
+### Nahmii Mainnet
