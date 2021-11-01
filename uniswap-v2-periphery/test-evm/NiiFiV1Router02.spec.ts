@@ -18,7 +18,7 @@ const overrides = {
   gasLimit: 9999999
 }
 
-describe('UniswapV2Router02', () => {
+describe('NiiFiV1Router02', () => {
   const [wallet] = provider.getWallets()
   const loadFixture = createFixtureLoader([wallet], provider)
 
@@ -36,39 +36,39 @@ describe('UniswapV2Router02', () => {
     expect(await router.quote(BigNumber.from(1), BigNumber.from(100), BigNumber.from(200))).to.eq(BigNumber.from(2))
     expect(await router.quote(BigNumber.from(2), BigNumber.from(200), BigNumber.from(100))).to.eq(BigNumber.from(1))
     await expect(router.quote(BigNumber.from(0), BigNumber.from(100), BigNumber.from(200))).to.be.revertedWith(
-      'UniswapV2Library: INSUFFICIENT_AMOUNT'
+      'NiiFiV1Library: INSUFFICIENT_AMOUNT'
     )
     await expect(router.quote(BigNumber.from(1), BigNumber.from(0), BigNumber.from(200))).to.be.revertedWith(
-      'UniswapV2Library: INSUFFICIENT_LIQUIDITY'
+      'NiiFiV1Library: INSUFFICIENT_LIQUIDITY'
     )
     await expect(router.quote(BigNumber.from(1), BigNumber.from(100), BigNumber.from(0))).to.be.revertedWith(
-      'UniswapV2Library: INSUFFICIENT_LIQUIDITY'
+      'NiiFiV1Library: INSUFFICIENT_LIQUIDITY'
     )
   })
 
   it('getAmountOut', async () => {
     expect(await router.getAmountOut(BigNumber.from(2), BigNumber.from(100), BigNumber.from(100))).to.eq(BigNumber.from(1))
     await expect(router.getAmountOut(BigNumber.from(0), BigNumber.from(100), BigNumber.from(100))).to.be.revertedWith(
-      'UniswapV2Library: INSUFFICIENT_INPUT_AMOUNT'
+      'NiiFiV1Library: INSUFFICIENT_INPUT_AMOUNT'
     )
     await expect(router.getAmountOut(BigNumber.from(2), BigNumber.from(0), BigNumber.from(100))).to.be.revertedWith(
-      'UniswapV2Library: INSUFFICIENT_LIQUIDITY'
+      'NiiFiV1Library: INSUFFICIENT_LIQUIDITY'
     )
     await expect(router.getAmountOut(BigNumber.from(2), BigNumber.from(100), BigNumber.from(0))).to.be.revertedWith(
-      'UniswapV2Library: INSUFFICIENT_LIQUIDITY'
+      'NiiFiV1Library: INSUFFICIENT_LIQUIDITY'
     )
   })
 
   it('getAmountIn', async () => {
     expect(await router.getAmountIn(BigNumber.from(1), BigNumber.from(100), BigNumber.from(100))).to.eq(BigNumber.from(2))
     await expect(router.getAmountIn(BigNumber.from(0), BigNumber.from(100), BigNumber.from(100))).to.be.revertedWith(
-      'UniswapV2Library: INSUFFICIENT_OUTPUT_AMOUNT'
+      'NiiFiV1Library: INSUFFICIENT_OUTPUT_AMOUNT'
     )
     await expect(router.getAmountIn(BigNumber.from(1), BigNumber.from(0), BigNumber.from(100))).to.be.revertedWith(
-      'UniswapV2Library: INSUFFICIENT_LIQUIDITY'
+      'NiiFiV1Library: INSUFFICIENT_LIQUIDITY'
     )
     await expect(router.getAmountIn(BigNumber.from(1), BigNumber.from(100), BigNumber.from(0))).to.be.revertedWith(
-      'UniswapV2Library: INSUFFICIENT_LIQUIDITY'
+      'NiiFiV1Library: INSUFFICIENT_LIQUIDITY'
     )
   })
 
@@ -88,7 +88,7 @@ describe('UniswapV2Router02', () => {
     )
 
     await expect(router.getAmountsOut(BigNumber.from(2), [token0.address])).to.be.revertedWith(
-      'UniswapV2Library: INVALID_PATH'
+      'NiiFiV1Library: INVALID_PATH'
     )
     const path = [token0.address, token1.address]
     expect(await router.getAmountsOut(BigNumber.from(2), path)).to.deep.eq([BigNumber.from(2), BigNumber.from(1)])
@@ -110,7 +110,7 @@ describe('UniswapV2Router02', () => {
     )
 
     await expect(router.getAmountsIn(BigNumber.from(1), [token0.address])).to.be.revertedWith(
-      'UniswapV2Library: INVALID_PATH'
+      'NiiFiV1Library: INVALID_PATH'
     )
     const path = [token0.address, token1.address]
     expect(await router.getAmountsIn(BigNumber.from(1), path)).to.deep.eq([BigNumber.from(2), BigNumber.from(1)])

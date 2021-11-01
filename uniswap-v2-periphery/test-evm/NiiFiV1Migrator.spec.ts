@@ -14,7 +14,7 @@ const overrides = {
   gasLimit: 9999999
 }
 
-describe('UniswapV2Migrator', () => {
+describe('NiiFiV1Migrator', () => {
   const [wallet] = provider.getWallets()
   const loadFixture = createFixtureLoader([wallet], provider)
 

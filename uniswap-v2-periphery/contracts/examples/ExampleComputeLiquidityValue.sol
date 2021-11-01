@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity =0.6.12;
 
-import '../libraries/UniswapV2LiquidityMathLibrary.sol';
+import '../libraries/NiiFiV1LiquidityMathLibrary.sol';
 
 contract ExampleComputeLiquidityValue {
     using SafeMath for uint256;
@@ -12,14 +12,14 @@ contract ExampleComputeLiquidityValue {
         factory = factory_;
     }
 
-    // see UniswapV2LiquidityMathLibrary#getReservesAfterArbitrage
+    // see NiiFiV1LiquidityMathLibrary#getReservesAfterArbitrage
     function getReservesAfterArbitrage(
         address tokenA,
         address tokenB,
         uint256 truePriceTokenA,
         uint256 truePriceTokenB
     ) external view returns (uint256 reserveA, uint256 reserveB) {
-        return UniswapV2LiquidityMathLibrary.getReservesAfterArbitrage(
+        return NiiFiV1LiquidityMathLibrary.getReservesAfterArbitrage(
             factory,
             tokenA,
             tokenB,
@@ -28,7 +28,7 @@ contract ExampleComputeLiquidityValue {
         );
     }
 
-    // see UniswapV2LiquidityMathLibrary#getLiquidityValue
+    // see NiiFiV1LiquidityMathLibrary#getLiquidityValue
     function getLiquidityValue(
         address tokenA,
         address tokenB,
@@ -37,7 +37,7 @@ contract ExampleComputeLiquidityValue {
         uint256 tokenAAmount,
         uint256 tokenBAmount
     ) {
-        return UniswapV2LiquidityMathLibrary.getLiquidityValue(
+        return NiiFiV1LiquidityMathLibrary.getLiquidityValue(
             factory,
             tokenA,
             tokenB,
@@ -45,7 +45,7 @@ contract ExampleComputeLiquidityValue {
         );
     }
 
-    // see UniswapV2LiquidityMathLibrary#getLiquidityValueAfterArbitrageToPrice
+    // see NiiFiV1LiquidityMathLibrary#getLiquidityValueAfterArbitrageToPrice
     function getLiquidityValueAfterArbitrageToPrice(
         address tokenA,
         address tokenB,
@@ -56,7 +56,7 @@ contract ExampleComputeLiquidityValue {
         uint256 tokenAAmount,
         uint256 tokenBAmount
     ) {
-        return UniswapV2LiquidityMathLibrary.getLiquidityValueAfterArbitrageToPrice(
+        return NiiFiV1LiquidityMathLibrary.getLiquidityValueAfterArbitrageToPrice(
             factory,
             tokenA,
             tokenB,
@@ -77,7 +77,7 @@ contract ExampleComputeLiquidityValue {
         uint256
     ) {
         uint gasBefore = gasleft();
-        UniswapV2LiquidityMathLibrary.getLiquidityValueAfterArbitrageToPrice(
+        NiiFiV1LiquidityMathLibrary.getLiquidityValueAfterArbitrageToPrice(
             factory,
             tokenA,
             tokenB,
