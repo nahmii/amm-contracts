@@ -1,15 +1,14 @@
-# Uniswap V2
+# NiiFi V1 periphery contracts
 
-[![Actions Status](https://github.com/Uniswap/uniswap-v2-periphery/workflows/CI/badge.svg)](https://github.com/Uniswap/uniswap-v2-periphery/actions)
-[![npm](https://img.shields.io/npm/v/@uniswap/v2-periphery?style=flat-square)](https://npmjs.com/package/@uniswap/v2-periphery)
-
+The NiiFi V1 contracts follow the same API as Uniswap V2.
 In-depth documentation on Uniswap V2 is available at [uniswap.org](https://uniswap.org/docs).
-
 The built contract artifacts can be browsed via [unpkg.com](https://unpkg.com/browse/@uniswap/v2-periphery@latest/).
 
 # Local Development
 
 The following assumes the use of `node@>=10`.
+
+NOTE: Prior to running or deploying the contracts, make sure the correct `INIT_HASH_CODE` is used in the `NiiFiV1Library` contract. For instructions, please see the core contracts README.
 
 ## Install Dependencies
 
@@ -37,7 +36,7 @@ Keep in mind that the remote testnet would require your test wallet address, cor
 
 Also note that the address of deployed `NiiFiV1Factory` has to be whitelisted, as this contract will need to deploy `NiiFiV1Pair` contract when creating a pair. You can set the `FACTORY_ADDRESS` to the one that has been whitelisted.
 
-## Deploy
+# Deploy
 
 NOTE: Prior to deploying, make sure to add a correct `FACTORY_ADDRESS` to the `.env` file. If you don't have one, please deploy the core smart contracts first and retrieve the factory address.
 
