@@ -1,10 +1,7 @@
-# Uniswap V2
+# NiiFi V1 core contracts
 
-[![Actions Status](https://github.com/Uniswap/uniswap-v2-core/workflows/CI/badge.svg)](https://github.com/Uniswap/uniswap-v2-core/actions)
-[![Version](https://img.shields.io/npm/v/@uniswap/v2-core)](https://www.npmjs.com/package/@uniswap/v2-core)
-
+The NiiFi V1 contracts follow the same API as Uniswap V2.
 In-depth documentation on Uniswap V2 is available at [uniswap.org](https://uniswap.org/docs).
-
 The built contract artifacts can be browsed via [unpkg.com](https://unpkg.com/browse/@uniswap/v2-core@latest/).
 
 # Local Development
@@ -31,7 +28,13 @@ EVM compiler:
 NVM compiler:
 `yarn test:nvm`
 
-## Deploy
+## Generate new hash code
+External dependencies depends on the hash of the `NiiFiV1Pair` contract to deterministically find the address of a token pair. This hash can be different based on the Solidity version and number of optimization runs used. 
+
+To generate a new hash code for your specific target, compile the contracts and run the `generate-init-code-hash` the following command in this folder:
+`yarn generate-hash`
+
+# Deploy
 
 Deploy to the live Nahmii Ropsten network:
 `yarn deploy:nvm`
