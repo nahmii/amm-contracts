@@ -19,12 +19,13 @@ async function main() {
     deployerAddress = account.address;
     console.log(`Deploying contracts using ${deployerAddress}`);
 
-    // Wrapped ether address
-    const wETH = "0x4200000000000000000000000000000000000006";
+    // Fee address: If set to 0x0, 0.3% fee goes to pool contributors. 
+    // Else, 0.25% goes to fee holders and 0.05% goes to the feeAddress.
+    const feeAddress = "0x0000000000000000000000000000000000000000";
 
     // Deploy factory
     const factory = await hre.ethers.getContractFactory('NiiFiV1Factory');
-    const factoryInstance = await factory.deploy(deployerAddress);
+    const factoryInstance = await factory.deploy(feeAddress);
     await factoryInstance.deployed();
 
     console.log(`Factory deployed to: ${factoryInstance.address}`);
