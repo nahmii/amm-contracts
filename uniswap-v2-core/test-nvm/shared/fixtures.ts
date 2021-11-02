@@ -1,6 +1,4 @@
-import { Contract, Wallet } from 'ethers'
-import { Web3Provider } from '@ethersproject/providers'
-import { deployContract } from 'ethereum-waffle'
+import { Contract, ContractFactory, Wallet } from 'ethers'
 
 import { expandTo18Decimals } from './utilities'
 
@@ -16,8 +14,15 @@ const overrides = {
   gasLimit: 9999999
 }
 
-export async function factoryFixture([wallet]: Wallet[], _: Web3Provider): Promise<FactoryFixture> {
-  const factory = await deployContract(wallet, NiiFiV1Factory, [wallet.address], overrides)
+async function deploy(wallet, contractMeta, args) {
+  const factory = new ContractFactory(contractMeta.abi, contractMeta.bytecode, wallet)
+  const contract = await factory.deploy(...args)
+  await contract.deployed()
+  return contract
+}
+
+export async function factoryFixture([wallet]: Wallet[], _: any): Promise<FactoryFixture> {
+  const factory = await deploy(wallet, NiiFiV1Factory, [wallet.address], overrides)
   return { factory }
 }
 
@@ -30,8 +35,8 @@ interface PairFixture extends FactoryFixture {
 export async function pairFixture([wallet]: Wallet[], provider: any): Promise<PairFixture> {
   const { factory } = await factoryFixture([wallet], provider)
 
-  const tokenA = await deployContract(wallet, ERC20, [expandTo18Decimals(10000)], overrides)
-  const tokenB = await deployContract(wallet, ERC20, [expandTo18Decimals(10000)], overrides)
+  const tokenA = await deploy(wallet, ERC20, [expandTo18Decimals(10000)], overrides)
+  const tokenB = await deploy(wallet, ERC20, [expandTo18Decimals(10000)], overrides)
 
   await factory.createPair(tokenA.address, tokenB.address, overrides)
   const pairAddress = await factory.getPair(tokenA.address, tokenB.address)
