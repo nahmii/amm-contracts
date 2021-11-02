@@ -10,10 +10,6 @@ interface FactoryFixture {
   factory: Contract
 }
 
-const overrides = {
-  gasLimit: 9999999
-}
-
 async function deploy(wallet, contractMeta, args) {
   const factory = new ContractFactory(contractMeta.abi, contractMeta.bytecode, wallet)
   const contract = await factory.deploy(...args)
@@ -22,7 +18,7 @@ async function deploy(wallet, contractMeta, args) {
 }
 
 export async function factoryFixture([wallet]: Wallet[], _: any): Promise<FactoryFixture> {
-  const factory = await deploy(wallet, NiiFiV1Factory, [wallet.address], overrides)
+  const factory = await deploy(wallet, NiiFiV1Factory, [wallet.address])
   return { factory }
 }
 
@@ -35,10 +31,10 @@ interface PairFixture extends FactoryFixture {
 export async function pairFixture([wallet]: Wallet[], provider: any): Promise<PairFixture> {
   const { factory } = await factoryFixture([wallet], provider)
 
-  const tokenA = await deploy(wallet, ERC20, [expandTo18Decimals(10000)], overrides)
-  const tokenB = await deploy(wallet, ERC20, [expandTo18Decimals(10000)], overrides)
+  const tokenA = await deploy(wallet, ERC20, [expandTo18Decimals(10000)])
+  const tokenB = await deploy(wallet, ERC20, [expandTo18Decimals(10000)])
 
-  await factory.createPair(tokenA.address, tokenB.address, overrides)
+  await factory.createPair(tokenA.address, tokenB.address)
   const pairAddress = await factory.getPair(tokenA.address, tokenB.address)
   const pair = new Contract(pairAddress, JSON.stringify(NiiFiV1Pair.abi), provider).connect(wallet)
 
