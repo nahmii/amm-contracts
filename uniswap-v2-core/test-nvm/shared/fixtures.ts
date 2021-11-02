@@ -10,7 +10,7 @@ interface FactoryFixture {
   factory: Contract
 }
 
-async function deploy(wallet, contractMeta, args) {
+export async function deploy(wallet, contractMeta, args) {
   const factory = new ContractFactory(contractMeta.abi, contractMeta.bytecode, wallet)
   const contract = await factory.deploy(...args)
   await contract.deployed()

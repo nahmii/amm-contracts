@@ -13,7 +13,7 @@ const MINIMUM_LIQUIDITY = BigNumber.from(10).pow(3)
 chai.use(solidity)
 
 const overrides = {
-  gasLimit: 9999999
+  gasLimit: 0
 }
 
 describe('NiiFiV1Pair', () => {

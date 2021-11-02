@@ -6,11 +6,12 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { hexlify } from '@ethersproject/bytes'
 import { keccak256 } from '@ethersproject/keccak256'
 import { toUtf8Bytes } from '@ethersproject/strings'
-import { solidity, deployContract } from 'ethereum-waffle'
+import { solidity } from 'ethereum-waffle'
 import { ecsign } from 'ethereumjs-util'
 
 import { expandTo18Decimals, getApprovalDigest } from './shared/utilities'
 import { provider, chainId } from './shared/config'
+import { deploy } from './shared/fixtures'
 
 import ERC20 from '../artifacts-ovm/contracts/test/ERC20.sol/ERC20.json'
 
@@ -25,7 +26,7 @@ describe('NiiFiV1ERC20', () => {
 
   let token: Contract
   beforeEach(async () => {
-    token = await deployContract(wallet, ERC20, [TOTAL_SUPPLY])
+    token = await deploy(wallet, ERC20, [TOTAL_SUPPLY])
   })
 
   it('name, symbol, decimals, totalSupply, balanceOf, DOMAIN_SEPARATOR, PERMIT_TYPEHASH', async () => {
