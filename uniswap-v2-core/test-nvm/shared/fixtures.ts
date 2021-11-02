@@ -27,7 +27,7 @@ interface PairFixture extends FactoryFixture {
   pair: Contract
 }
 
-export async function pairFixture([wallet]: Wallet[], provider: Web3Provider): Promise<PairFixture> {
+export async function pairFixture([wallet]: Wallet[], provider: any): Promise<PairFixture> {
   const { factory } = await factoryFixture([wallet], provider)
 
   const tokenA = await deployContract(wallet, ERC20, [expandTo18Decimals(10000)], overrides)
