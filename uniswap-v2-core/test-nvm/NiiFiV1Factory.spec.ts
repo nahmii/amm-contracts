@@ -64,7 +64,7 @@ describe('NiiFiV1Factory', () => {
   it('createPair:gas', async () => {
     const tx = await factory.createPair(...TEST_ADDRESSES)
     const receipt = await tx.wait()
-    expect(receipt.gasUsed).to.eq(5006952)
+    expect(receipt.gasUsed).to.eq(5008700)
   })
 
   it('setFeeTo', async () => {
