@@ -38,7 +38,7 @@ module.exports = {
             url: process.env.L2_URL,
             accounts,
             gasPrice: 15000000,
-            gas: 9000000,
+            gas: 27000000,
             ovm: true
         }
     },
