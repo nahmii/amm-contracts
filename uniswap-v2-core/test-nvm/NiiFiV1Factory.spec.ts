@@ -18,6 +18,7 @@ const TEST_ADDRESSES: [string, string] = [
 ]
 
 describe('NiiFiV1Factory', () => {
+  //@ts-ignore
   const [wallet, other] = provider.getWallets()
   const loadFixture = createFixtureLoader([wallet, other], provider)
 

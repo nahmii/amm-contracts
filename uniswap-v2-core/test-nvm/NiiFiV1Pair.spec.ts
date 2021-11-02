@@ -17,6 +17,7 @@ const overrides = {
 }
 
 describe('NiiFiV1Pair', () => {
+  //@ts-ignore
   const [wallet, other] = provider.getWallets()
   const loadFixture = createFixtureLoader([wallet], provider)
 

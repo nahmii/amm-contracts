@@ -20,6 +20,7 @@ const TOTAL_SUPPLY = expandTo18Decimals(10000)
 const TEST_AMOUNT = expandTo18Decimals(10)
 
 describe('NiiFiV1ERC20', () => {
+  //@ts-ignore
   const [wallet, other] = provider.getWallets()
 
   let token: Contract
