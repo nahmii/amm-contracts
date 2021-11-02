@@ -18,21 +18,8 @@ export async function deploy(wallet, contractMeta, args) {
 }
 
 export async function factoryFixture([wallet]: Wallet[], provider: any): Promise<FactoryFixture> {
-  let factory
-  if (process.env.FACTORY_ADDRESS) {
-    factory = new Contract(
-      process.env.FACTORY_ADDRESS, 
-      JSON.stringify(NiiFiV1Factory.abi), 
-      provider
-    ).connect(wallet)
-
-    console.log('Reuse factory address:', factory.address)
-  }
-  else {
-    factory = await deploy(wallet, NiiFiV1Factory, [AddressZero])
-
-    console.log('Deployed factory:', factory.address)
-  }
+  const factory = await deploy(wallet, NiiFiV1Factory, [wallet.address])
+  console.log('Deployed factory:', factory.address)
   
   return { factory }
 }
