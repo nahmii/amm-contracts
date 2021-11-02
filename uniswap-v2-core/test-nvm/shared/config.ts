@@ -1,25 +1,21 @@
-/**
- * @dev Handles chain-specific configuration based on whether we are running
- * EVM or OVM tests
- */
+import { ethers } from 'ethers'
+require('dotenv').config();
 
- import { MockProvider } from 'ethereum-waffle' // standard EVM MockProvider from Waffle
+const config = {
+  l2Url: process.env.L2_URL || 'http://127.0.0.1:8545',
+  privateKey: process.env.PRIVATE_KEY,
+  chainId: ethers.BigNumber.from(process.env.CHAIN_ID || 555)
+}
 
- // Determine which network we are on
- const isNVM = process.env.MODE === 'NVM'
- 
- // Get provider: We keep the same provider config that Uniswap tests were
- // already using, but generate the provider instance based on the test mode
- const options: any = {
-   ganacheOptions: {
-     hardfork: 'istanbul',
-     mnemonic: 'horn horn horn horn horn horn horn horn horn horn horn horn',
-     gasLimit: 9999999
-   }
- }
- const provider = new MockProvider(options)
- 
- // Get Chain ID
- const chainId = isNVM ? 5553 : 1
- 
- export { provider, chainId }
+const provider = new ethers.providers.JsonRpcProvider(config.l2Url)
+provider.getGasPrice = async () => ethers.BigNumber.from(0)
+//@ts-ignore
+provider.getWallets = () => {
+  return [
+    new ethers.Wallet(config.privateKey as string).connect(provider),
+  ]
+}
+
+const chainId = config.chainId
+
+export { provider, chainId }
