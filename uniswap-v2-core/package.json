@@ -45,8 +45,8 @@
     "compile:nvm": "hardhat compile --network nahmii",
     "pretest:evm": "yarn compile:evm",
     "pretest:nvm": "yarn compile:nvm",
-    "test:evm": "mocha",
-    "test:nvm": "export MODE=NVM && mocha",
+    "test:evm": "mocha \"./test-evm/**/*.ts\"",
+    "test:nvm": "mocha \"./test-nvm/**/*.ts\"",
     "prepublishOnly": "yarn test:evm && yarn test:nvm",
     "deploy:nvm": "npx hardhat run --network nahmii scripts/deploy.js",
     "generate-hash": "node scripts/generate-init-code-hash.js"
