@@ -22,10 +22,15 @@ NVM compiler:
 
 ## Run Tests
 
-EVM compiler:
+### EVM based
+To test against a local EVM based instance, run:
 `yarn test:evm`
 
-NVM compiler:
+### NVM based
+Before running the NVM based tests, make sure to edit the `.env` file.
+These tests require two funded addresses on either a local or live instance.
+
+To test against a live Nahmii instance, run:
 `yarn test:nvm`
 
 ## Generate new hash code
@@ -34,9 +39,9 @@ External dependencies depends on the hash of the `NiiFiV1Pair` contract to deter
 To generate a new hash code for your specific target, compile the contracts and run the `generate-init-code-hash` the following command in this folder:
 `yarn generate-hash`
 
-# Deploy
+## Deploy
 
-Deploy to the live Nahmii Ropsten network:
+Deploy to a specified target network:
 `yarn deploy:nvm`
 
 Alternatively, it is also possible to flatten the smart contracts and deploying them manually.
