@@ -1,5 +1,5 @@
 import { Contract, ContractFactory, Wallet } from 'ethers'
-
+import { AddressZero } from '@ethersproject/constants'
 import { expandTo18Decimals } from './utilities'
 
 import ERC20 from '../../artifacts-ovm/contracts/test/ERC20.sol/ERC20.json'
@@ -29,7 +29,7 @@ export async function factoryFixture([wallet]: Wallet[], provider: any): Promise
     console.log('Reuse factory address:', factory.address)
   }
   else {
-    factory = await deploy(wallet, NiiFiV1Factory, [wallet.address])
+    factory = await deploy(wallet, NiiFiV1Factory, [AddressZero])
 
     console.log('Deployed factory:', factory.address)
   }
