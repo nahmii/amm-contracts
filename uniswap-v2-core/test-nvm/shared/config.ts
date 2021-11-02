@@ -3,7 +3,8 @@ require('dotenv').config();
 
 const config = {
   l2Url: process.env.L2_URL || 'http://127.0.0.1:8545',
-  privateKey: process.env.PRIVATE_KEY,
+  pkAccountOne: process.env.PRIVATE_KEY,
+  pkAccountTwo: process.env.PRIVATE_KEY_OTHER,
   chainId: ethers.BigNumber.from(process.env.CHAIN_ID || 555)
 }
 
@@ -12,7 +13,8 @@ provider.getGasPrice = async () => ethers.BigNumber.from(0)
 //@ts-ignore
 provider.getWallets = () => {
   return [
-    new ethers.Wallet(config.privateKey as string).connect(provider),
+    new ethers.Wallet(config.pkAccountOne as string).connect(provider),
+    new ethers.Wallet(config.pkAccountTwo as string).connect(provider)
   ]
 }
 
