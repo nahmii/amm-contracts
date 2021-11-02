@@ -1,5 +1,4 @@
 import { Contract, ContractFactory, Wallet } from 'ethers'
-import { AddressZero } from '@ethersproject/constants'
 import { expandTo18Decimals } from './utilities'
 
 import ERC20 from '../../artifacts-ovm/contracts/test/ERC20.sol/ERC20.json'
