@@ -57,6 +57,7 @@
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "dotenv": "^10.0.0",
+    "envalid": "^7.2.2",
     "glob": "^7.1.7",
     "hardhat": "^2.6.1"
   }
