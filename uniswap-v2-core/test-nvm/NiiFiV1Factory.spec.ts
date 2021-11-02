@@ -2,7 +2,7 @@ import chai, { expect } from 'chai'
 import { Contract } from 'ethers'
 import { AddressZero } from '@ethersproject/constants'
 import { BigNumber } from '@ethersproject/bignumber'
-import { solidity, createFixtureLoader } from 'ethereum-waffle'
+import { solidity } from 'ethereum-waffle'
 
 import { getCreate2Address } from './shared/utilities'
 import { factoryFixture } from './shared/fixtures'
@@ -20,11 +20,10 @@ const TEST_ADDRESSES: [string, string] = [
 describe('NiiFiV1Factory', () => {
   //@ts-ignore
   const [wallet, other] = provider.getWallets()
-  const loadFixture = createFixtureLoader([wallet, other], provider)
 
   let factory: Contract
   beforeEach(async () => {
-    const fixture = await loadFixture(factoryFixture)
+    const fixture = await factoryFixture([wallet], provider)
     factory = fixture.factory
   })
 

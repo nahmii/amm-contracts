@@ -1,6 +1,6 @@
 import chai, { expect } from 'chai'
 import { Contract } from 'ethers'
-import { solidity, createFixtureLoader } from 'ethereum-waffle'
+import { solidity } from 'ethereum-waffle'
 import { BigNumber } from '@ethersproject/bignumber'; 
 
 import { expandTo18Decimals, mineBlock, encodePrice } from './shared/utilities'
@@ -19,14 +19,13 @@ const overrides = {
 describe('NiiFiV1Pair', () => {
   //@ts-ignore
   const [wallet, other] = provider.getWallets()
-  const loadFixture = createFixtureLoader([wallet], provider)
 
   let factory: Contract
   let token0: Contract
   let token1: Contract
   let pair: Contract
   beforeEach(async () => {
-    const fixture = await loadFixture(pairFixture)
+    const fixture = await pairFixture([wallet], provider)
     factory = fixture.factory
     token0 = fixture.token0
     token1 = fixture.token1
