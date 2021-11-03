@@ -35,7 +35,7 @@ export async function pairFixture([wallet]: Wallet[], provider: any): Promise<Pa
 
   await factory.createPair(tokenA.address, tokenB.address)
   const pairAddress = await factory.getPair(tokenA.address, tokenB.address)
-  const pair = new Contract(pairAddress, JSON.stringify(NiiFiV1Pair.abi), provider).connect(wallet)
+  const pair = new Contract(pairAddress, NiiFiV1Pair.abi, wallet)
 
   const token0Address = await pair.token0()
   const token0 = tokenA.address === token0Address ? tokenA : tokenB
