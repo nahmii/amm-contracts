@@ -3,7 +3,7 @@ import { Contract } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { BigNumber } from '@ethersproject/bignumber'; 
 
-import { expandTo18Decimals, mineBlock, encodePrice } from './shared/utilities'
+import { expandTo18Decimals, encodePrice } from './shared/utilities'
 import { pairFixture } from './shared/fixtures'
 import { AddressZero } from '@ethersproject/constants'
 import { provider } from './shared/config'
