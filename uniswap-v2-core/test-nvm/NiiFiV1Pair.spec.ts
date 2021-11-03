@@ -209,7 +209,6 @@ describe('NiiFiV1Pair', () => {
     await addLiquidity(token0Amount, token1Amount)
 
     const blockTimestamp = (await pair.getReserves())[2]
-    await mineBlock(provider, blockTimestamp + 1)
     await pair.sync(overrides)
 
     const initialPrice = encodePrice(token0Amount, token1Amount)
@@ -219,7 +218,6 @@ describe('NiiFiV1Pair', () => {
 
     const swapAmount = expandTo18Decimals(3)
     await token0.transfer(pair.address, swapAmount)
-    await mineBlock(provider, blockTimestamp + 10)
     // swap to a new price eagerly instead of syncing
     await pair.swap(0, expandTo18Decimals(1), wallet.address, '0x', overrides) // make the price nice
 
@@ -227,7 +225,6 @@ describe('NiiFiV1Pair', () => {
     expect(await pair.price1CumulativeLast()).to.eq(initialPrice[1].mul(10))
     expect((await pair.getReserves())[2]).to.eq(blockTimestamp + 10)
 
-    await mineBlock(provider, blockTimestamp + 20)
     await pair.sync(overrides)
 
     const newPrice = encodePrice(expandTo18Decimals(6), expandTo18Decimals(2))
