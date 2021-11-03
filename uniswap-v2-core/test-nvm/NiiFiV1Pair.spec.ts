@@ -164,13 +164,11 @@ describe('NiiFiV1Pair', () => {
     await addLiquidity(token0Amount, token1Amount)
 
     // ensure that setting price{0,1}CumulativeLast for the first time doesn't affect our gas math
-    await mineBlock(provider, (await provider.getBlock('latest')).timestamp + 1)
     await pair.sync(overrides)
 
     const swapAmount = expandTo18Decimals(1)
     const expectedOutputAmount = BigNumber.from('453305446940074565')
     await token1.transfer(pair.address, swapAmount)
-    await mineBlock(provider, (await provider.getBlock('latest')).timestamp + 1)
     const tx = await pair.swap(expectedOutputAmount, 0, wallet.address, '0x', overrides)
     const receipt = await tx.wait()
     expect(receipt.gasUsed).to.eq(73973)
