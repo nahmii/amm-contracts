@@ -171,7 +171,7 @@ describe('NiiFiV1Pair', () => {
     await token1.transfer(pair.address, swapAmount)
     const tx = await pair.swap(expectedOutputAmount, 0, wallet.address, '0x', overrides)
     const receipt = await tx.wait()
-    expect(receipt.gasUsed).to.eq(73973)
+    expect(receipt.gasUsed).to.be.at.least(1230000).and.at.most(1240000)
   })
 
   it('burn', async () => {
