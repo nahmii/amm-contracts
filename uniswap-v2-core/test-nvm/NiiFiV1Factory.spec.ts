@@ -61,7 +61,7 @@ describe('NiiFiV1Factory', () => {
     await createPair(TEST_ADDRESSES.slice().reverse() as [string, string])
   })
 
-  it.only('createPair:gas', async () => {
+  it('createPair:gas', async () => {
     const tx = await factory.createPair(...TEST_ADDRESSES)
     const receipt = await tx.wait()
     expect(receipt.gasUsed).to.be.at.least(5006952).and.at.most(5008762)
