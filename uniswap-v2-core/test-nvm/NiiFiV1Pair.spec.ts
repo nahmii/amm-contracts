@@ -1,4 +1,4 @@
-import chai, { expect } from 'chai'
+import chai from 'chai'
 import { Contract } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { BigNumber } from '@ethersproject/bignumber'; 
@@ -11,6 +11,8 @@ import { provider } from './shared/config'
 const MINIMUM_LIQUIDITY = BigNumber.from(10).pow(3)
 
 chai.use(solidity)
+
+const { expect } = chai;
 
 const overrides = {
   gasLimit: 0
@@ -79,10 +81,10 @@ describe('NiiFiV1Pair', () => {
       const [swapAmount, token0Amount, token1Amount, expectedOutputAmount] = swapTestCase
       await addLiquidity(token0Amount, token1Amount)
       await token0.transfer(pair.address, swapAmount)
-      await expect(pair.swap(0, expectedOutputAmount.add(1), wallet.address, '0x', overrides)).to.be.revertedWith(
+      await expect(pair.swap(0, expectedOutputAmount.add(1), wallet.address, '0x')).to.be.revertedWith(
         'NiiFiV1: K'
       )
-      await pair.swap(0, expectedOutputAmount, wallet.address, '0x', overrides)
+      await pair.swap(0, expectedOutputAmount, wallet.address, '0x')
     })
   })
 
