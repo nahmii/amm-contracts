@@ -16,10 +16,8 @@ export async function deploy(wallet, contractMeta, args) {
   return contract
 }
 
-export async function factoryFixture([wallet]: Wallet[], provider: any): Promise<FactoryFixture> {
-  const factory = await deploy(wallet, NiiFiV1Factory, [wallet.address])
-  console.log('Deployed factory:', factory.address)
-  
+export async function factoryFixture([wallet]: Wallet[], _: any): Promise<FactoryFixture> {
+  const factory = await deploy(wallet, NiiFiV1Factory, [wallet.address])  
   return { factory }
 }
 
