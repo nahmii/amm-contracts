@@ -38,7 +38,7 @@
   "scripts": {
     "lint": "yarn prettier ./test/*.ts --check",
     "lint:fix": "yarn prettier ./test/*.ts --write",
-    "clean": "rimraf ./build/ ./artifacts-ovm/",
+    "clean": "rimraf ./build/ ./artifacts-nvm/",
     "precompile:evm": "yarn clean",
     "precompile:nvm": "yarn clean",
     "compile:evm": "waffle .waffle.json",
