@@ -1,5 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
-require('@eth-optimism/hardhat-ovm');
+require('@nahmii/hardhat-nvm');
 require('dotenv').config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -39,7 +39,7 @@ module.exports = {
             accounts,
             gasPrice: 15000000,
             gas: 27000000,
-            ovm: true
+            nvm: true
         }
     },
     ovm: {
