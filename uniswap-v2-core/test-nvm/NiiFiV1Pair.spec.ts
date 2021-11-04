@@ -1,18 +1,18 @@
 import chai from 'chai'
 import { Contract } from 'ethers'
 import { solidity } from 'ethereum-waffle'
-import { BigNumber } from '@ethersproject/bignumber'; 
+import { BigNumber } from '@ethersproject/bignumber'
 
 import { expandTo18Decimals, encodePrice, addPrice, waitBlocks } from './shared/utilities'
 import { pairFixture } from './shared/fixtures'
 import { AddressZero } from '@ethersproject/constants'
-import { l1Provider, l2Provider } from './shared/config'
+import { l1BlockTime, l1Provider, l2Provider, l1BlockWait } from './shared/config'
 
 const MINIMUM_LIQUIDITY = BigNumber.from(10).pow(3)
 
 chai.use(solidity)
 
-const { expect } = chai;
+const { expect } = chai
 
 const overrides = {
   gasLimit: 0
@@ -81,9 +81,7 @@ describe('NiiFiV1Pair', () => {
       const [swapAmount, token0Amount, token1Amount, expectedOutputAmount] = swapTestCase
       await addLiquidity(token0Amount, token1Amount)
       await token0.transfer(pair.address, swapAmount)
-      await expect(pair.swap(0, expectedOutputAmount.add(1), wallet.address, '0x')).to.be.revertedWith(
-        'NiiFiV1: K'
-      )
+      await expect(pair.swap(0, expectedOutputAmount.add(1), wallet.address, '0x')).to.be.revertedWith('NiiFiV1: K')
       await pair.swap(0, expectedOutputAmount, wallet.address, '0x')
     })
   })
@@ -99,9 +97,7 @@ describe('NiiFiV1Pair', () => {
       const [outputAmount, token0Amount, token1Amount, inputAmount] = optimisticTestCase
       await addLiquidity(token0Amount, token1Amount)
       await token0.transfer(pair.address, inputAmount)
-      await expect(pair.swap(outputAmount.add(1), 0, wallet.address, '0x')).to.be.revertedWith(
-        'NiiFiV1: K'
-      )
+      await expect(pair.swap(outputAmount.add(1), 0, wallet.address, '0x')).to.be.revertedWith('NiiFiV1: K')
       await pair.swap(outputAmount, 0, wallet.address, '0x', overrides)
     })
   })
@@ -173,7 +169,9 @@ describe('NiiFiV1Pair', () => {
     await token1.transfer(pair.address, swapAmount)
     const tx = await pair.swap(expectedOutputAmount, 0, wallet.address, '0x', overrides)
     const receipt = await tx.wait()
-    expect(receipt.gasUsed).to.be.at.least(1230000).and.at.most(1240000)
+    expect(receipt.gasUsed)
+      .to.be.at.least(1230000)
+      .and.at.most(1240000)
   })
 
   it('burn', async () => {
@@ -217,7 +215,7 @@ describe('NiiFiV1Pair', () => {
     expect(await pair.price0CumulativeLast()).to.eq(0)
     expect(await pair.price1CumulativeLast()).to.eq(0)
 
-    await waitBlocks(l1Provider, 5)
+    await waitBlocks(l1Provider, l1BlockWait)
 
     await pair.sync(overrides)
 
@@ -229,7 +227,7 @@ describe('NiiFiV1Pair', () => {
     expect(await pair.price0CumulativeLast()).to.eq(price[0])
     expect(await pair.price1CumulativeLast()).to.eq(price[1])
 
-    await waitBlocks(l1Provider, 5)
+    await waitBlocks(l1Provider, l1BlockWait)
 
     const swapAmount = expandTo18Decimals(3)
     await token0.transfer(pair.address, swapAmount)
@@ -240,11 +238,14 @@ describe('NiiFiV1Pair', () => {
     const [, , timeStamp3] = await pair.getReserves()
     expect(timeStamp3).to.eq(blockTimestamp)
 
-    price = addPrice(price, encodePrice(expandTo18Decimals(6), expandTo18Decimals(2), BigNumber.from(timeStamp3 - timeStamp2)))
+    price = addPrice(
+      price,
+      encodePrice(expandTo18Decimals(6), expandTo18Decimals(2), BigNumber.from(timeStamp3 - timeStamp2))
+    )
     expect(await pair.price0CumulativeLast()).to.eq(price[0])
     expect(await pair.price1CumulativeLast()).to.eq(price[1])
 
-    await waitBlocks(l1Provider, 5)
+    await waitBlocks(l1Provider, l1BlockWait)
 
     await pair.sync(overrides)
 
@@ -252,10 +253,13 @@ describe('NiiFiV1Pair', () => {
     const [, , timeStamp4] = await pair.getReserves()
     expect(timeStamp4).to.eq(blockTimestamp)
 
-    price = addPrice(price, encodePrice(expandTo18Decimals(6), expandTo18Decimals(2), BigNumber.from(timeStamp4 - timeStamp3)))
+    price = addPrice(
+      price,
+      encodePrice(expandTo18Decimals(6), expandTo18Decimals(2), BigNumber.from(timeStamp4 - timeStamp3))
+    )
     expect(await pair.price0CumulativeLast()).to.eq(price[0])
     expect(await pair.price1CumulativeLast()).to.eq(price[1])
-  })
+  }).timeout(3 * l1BlockWait * l1BlockTime * 1000) // Extend timeout for this test only, because of 3 iterations of waitBlock
 
   it('feeTo:off', async () => {
     const token0Amount = expandTo18Decimals(1000)
