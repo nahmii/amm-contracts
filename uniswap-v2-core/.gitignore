@@ -1,6 +1,8 @@
 node_modules/
 artifacts
 artifacts-ovm
+artifacts-nvm
 build/
 cache
 cache-ovm
+cache-nvm
