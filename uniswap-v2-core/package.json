@@ -54,6 +54,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "@eth-optimism/hardhat-ovm": "^0.2.3",
+    "@nahmii/hardhat-nvm": "^0.2.3",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "dotenv": "^10.0.0",

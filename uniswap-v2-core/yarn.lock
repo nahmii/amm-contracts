@@ -517,6 +517,13 @@
     "@ethersproject/properties" "^5.4.0"
     "@ethersproject/strings" "^5.4.0"
 
+"@nahmii/hardhat-nvm@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@nahmii/hardhat-nvm/-/hardhat-nvm-0.2.3.tgz#ebf625a2d4bf9dbbe8f9962bf8c118d1c7381254"
+  integrity sha512-/tt5GYp2slJpBIAzpol9PTMt1e367sbLk07uyjbOVs/fDJZogWA90h8gMwfSsab5+A+kHyxGuwZMpWD8gdxpvQ==
+  dependencies:
+    node-fetch "^2.6.1"
+
 "@nomiclabs/hardhat-ethers@^2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@nomiclabs/hardhat-ethers/-/hardhat-ethers-2.0.2.tgz#c472abcba0c5185aaa4ad4070146e95213c68511"
