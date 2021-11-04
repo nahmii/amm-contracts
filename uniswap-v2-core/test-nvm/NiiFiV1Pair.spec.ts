@@ -3,10 +3,10 @@ import { Contract } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { BigNumber } from '@ethersproject/bignumber'; 
 
-import { expandTo18Decimals, encodePrice } from './shared/utilities'
+import { expandTo18Decimals, encodePrice, addPrice, waitBlocks } from './shared/utilities'
 import { pairFixture } from './shared/fixtures'
 import { AddressZero } from '@ethersproject/constants'
-import { provider } from './shared/config'
+import { l1Provider, provider } from './shared/config'
 
 const MINIMUM_LIQUIDITY = BigNumber.from(10).pow(3)
 
@@ -63,7 +63,8 @@ describe('NiiFiV1Pair', () => {
   async function addLiquidity(token0Amount: BigNumber, token1Amount: BigNumber) {
     await token0.transfer(pair.address, token0Amount)
     await token1.transfer(pair.address, token1Amount)
-    await pair.mint(wallet.address, overrides)
+    const tx = await pair.mint(wallet.address, overrides)
+    await tx.wait()
   }
   const swapTestCases: BigNumber[][] = [
     [1, 5, 10, '1662497915624478906'],
@@ -210,29 +211,55 @@ describe('NiiFiV1Pair', () => {
     const token1Amount = expandTo18Decimals(3)
     await addLiquidity(token0Amount, token1Amount)
 
-    const blockTimestamp = (await pair.getReserves())[2]
-    await pair.sync(overrides)
+    let blockTimestamp = (await provider.getBlock('latest')).timestamp
+    const [, , timeStamp1] = await pair.getReserves()
+    expect(timeStamp1).to.eq(blockTimestamp)
 
-    const initialPrice = encodePrice(token0Amount, token1Amount)
-    expect(await pair.price0CumulativeLast()).to.eq(initialPrice[0])
-    expect(await pair.price1CumulativeLast()).to.eq(initialPrice[1])
-    expect((await pair.getReserves())[2]).to.eq(blockTimestamp + 1)
+    expect(await pair.price0CumulativeLast()).to.eq(0)
+    expect(await pair.price1CumulativeLast()).to.eq(0)
+
+    await waitBlocks(l1Provider, 5)
+
+    let tx = await pair.sync()
+    await tx.wait()
+
+    blockTimestamp = (await provider.getBlock('latest')).timestamp
+    const [, , timeStamp2] = await pair.getReserves()
+    expect(timeStamp2).to.eq(blockTimestamp)
+
+    let price = encodePrice(token0Amount, token1Amount, BigNumber.from(timeStamp2 - timeStamp1))
+    expect(await pair.price0CumulativeLast()).to.eq(price[0])
+    expect(await pair.price1CumulativeLast()).to.eq(price[1])
+
+    await waitBlocks(l1Provider, 5)
 
     const swapAmount = expandTo18Decimals(3)
-    await token0.transfer(pair.address, swapAmount)
+    tx = await token0.transfer(pair.address, swapAmount)
+    await tx.wait()
     // swap to a new price eagerly instead of syncing
-    await pair.swap(0, expandTo18Decimals(1), wallet.address, '0x', overrides) // make the price nice
+    tx = await pair.swap(0, expandTo18Decimals(1), wallet.address, '0x', overrides) // make the price nice
+    await tx.wait()
 
-    expect(await pair.price0CumulativeLast()).to.eq(initialPrice[0].mul(10))
-    expect(await pair.price1CumulativeLast()).to.eq(initialPrice[1].mul(10))
-    expect((await pair.getReserves())[2]).to.eq(blockTimestamp + 10)
+    blockTimestamp = (await provider.getBlock('latest')).timestamp
+    const [, , timeStamp3] = await pair.getReserves()
+    expect(timeStamp3).to.eq(blockTimestamp)
 
-    await pair.sync(overrides)
+    price = addPrice(price, encodePrice(expandTo18Decimals(6), expandTo18Decimals(2), BigNumber.from(timeStamp3 - timeStamp2)))
+    expect(await pair.price0CumulativeLast()).to.eq(price[0])
+    expect(await pair.price1CumulativeLast()).to.eq(price[1])
 
-    const newPrice = encodePrice(expandTo18Decimals(6), expandTo18Decimals(2))
-    expect(await pair.price0CumulativeLast()).to.eq(initialPrice[0].mul(10).add(newPrice[0].mul(10)))
-    expect(await pair.price1CumulativeLast()).to.eq(initialPrice[1].mul(10).add(newPrice[1].mul(10)))
-    expect((await pair.getReserves())[2]).to.eq(blockTimestamp + 20)
+    await waitBlocks(l1Provider, 5)
+
+    tx = await pair.sync()
+    await tx.wait()
+
+    blockTimestamp = (await provider.getBlock('latest')).timestamp
+    const [, , timeStamp4] = await pair.getReserves()
+    expect(timeStamp4).to.eq(blockTimestamp)
+
+    price = addPrice(price, encodePrice(expandTo18Decimals(6), expandTo18Decimals(2), BigNumber.from(timeStamp4 - timeStamp3)))
+    expect(await pair.price0CumulativeLast()).to.eq(price[0])
+    expect(await pair.price1CumulativeLast()).to.eq(price[1])
   })
 
   it('feeTo:off', async () => {
