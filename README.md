@@ -1,6 +1,6 @@
 # NiiFi exchange smart contracts
 
-This repository contains both the NiiFi uniswap forked v2-core and v2-periphery repositories. Changes versus the original repositories are:
+This repository contains both the NiiFi v1-core and v1-periphery repositories. Changes versus the original repositories are:
 - Compatibility with the Nahmii Virtual Machine (NVM).
 - Updated Waffle from V2 to V3.
 - Updated tests to work with Waffle V3.
@@ -21,8 +21,8 @@ Tested with:
 ## Architecture
 
 This repository contains 2 different solidity projects with two different compiler versions:
-- uniswap-v2-core -> Solidity 0.5.16
-- uniswap-v2-periphery -> Solidity 0.6.12
+- niifi-v1-core -> Solidity 0.5.16
+- niifi-v1-periphery -> Solidity 0.6.12
 
 The `core` project contains the main file to be deployed, the `NiiFiV1Factory` contract. The `periphery` project contains the `NiiFiV1Router02` contract, which is required for routing swaps and liquidity actions between pairs. 
 

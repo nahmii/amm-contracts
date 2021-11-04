@@ -2,8 +2,8 @@ import { Wallet, Contract, ContractFactory } from 'ethers'
 
 import { expandTo18Decimals } from './utilities'
 
-import NiiFiV1Factory from '../../../uniswap-v2-core/artifacts-nvm/contracts/NiiFiV1Factory.sol/NiiFiV1Factory.json'
-import INiiFiV1Pair from '../../../uniswap-v2-core/artifacts-nvm/contracts/NiiFiV1Pair.sol/NiiFiV1Pair.json'
+import NiiFiV1Factory from '../../../niifi-v1-core/artifacts-nvm/contracts/NiiFiV1Factory.sol/NiiFiV1Factory.json'
+import INiiFiV1Pair from '../../../niifi-v1-core/artifacts-nvm/contracts/NiiFiV1Pair.sol/NiiFiV1Pair.json'
 
 import ERC20 from '../../artifacts-nvm/contracts/test/ERC20.sol/ERC20.json'
 import WETH9 from '../../artifacts-nvm/contracts/test/WETH9.sol/WETH9.json'
