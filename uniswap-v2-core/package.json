@@ -1,18 +1,19 @@
 {
-  "name": "@uniswap/v2-core",
-  "description": "🎛 Core contracts for the UniswapV2 protocol",
-  "version": "1.0.1",
-  "homepage": "https://uniswap.org",
+  "name": "@niifi/v1-core",
+  "description": "🎛 Core contracts for the NiiFi V1 protocol",
+  "version": "1.0.0",
+  "homepage": "https://niifi.org",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Uniswap/uniswap-v2-core"
+    "url": "https://github.com/NiiFi/amm-contracts"
   },
   "keywords": [
-    "uniswap",
+    "niifi",
     "ethereum",
-    "v2",
+    "nahmii",
+    "v1",
     "core",
-    "uniswap-v2"
+    "niifi-v1"
   ],
   "files": [
     "contracts",

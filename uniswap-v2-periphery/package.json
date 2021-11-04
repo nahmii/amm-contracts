@@ -1,15 +1,23 @@
 {
-  "name": "@uniswap/v2-periphery",
-  "version": "1.1.0-beta.0",
-  "description": "🎚 Peripheral smart contracts for interacting with Uniswap V2",
+  "name": "@niifi/v1-periphery",
+  "version": "1.0.0",
+  "description": "🎚 Peripheral smart contracts for interacting with NiiFi V1",
   "engines": {
     "node": ">=10"
   },
-  "homepage": "https://uniswap.org",
+  "homepage": "https://niifi.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Uniswap/uniswap-v2-periphery"
+    "url": "https://github.com/NiiFi/amm-contracts"
   },
+  "keywords": [
+    "niifi",
+    "ethereum",
+    "nahmii",
+    "v1",
+    "periphery",
+    "niifi-v1"
+  ],
   "files": [
     "build",
     "contracts"
@@ -43,7 +51,7 @@
     "lint:fix": "yarn prettier ./test/*.ts --write",
     "clean": "rimraf ./build/ ./artifacts-nvm/",
     "copy-v1-artifacts": "ncp ./buildV1 ./build",
-    "copy-ovm-artifacts": "ncp ./artifacts-nvm ./build",
+    "copy-nvm-artifacts": "ncp ./artifacts-nvm ./build",
     "precompile:evm": "yarn clean",
     "precompile:nvm": "yarn clean",
     "compile:evm": "waffle .waffle.json",
