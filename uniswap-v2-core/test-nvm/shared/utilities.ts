@@ -6,6 +6,7 @@ import { keccak256 } from '@ethersproject/keccak256'
 import { pack as solidityPack } from '@ethersproject/solidity'
 import { toUtf8Bytes } from '@ethersproject/strings'
 import { chainId } from './config'
+import { JsonRpcProvider } from "@ethersproject/providers/src.ts/json-rpc-provider";
 
 const PERMIT_TYPEHASH = keccak256(
   toUtf8Bytes('Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)')
@@ -76,6 +77,36 @@ export async function getApprovalDigest(
   )
 }
 
-export function encodePrice(reserve0: BigNumber, reserve1: BigNumber) {
-  return [reserve1.mul(BigNumber.from(2).pow(112)).div(reserve0), reserve0.mul(BigNumber.from(2).pow(112)).div(reserve1)]
+export function encodePrice(reserve0: BigNumber, reserve1: BigNumber, timeElapsed: BigNumber) {
+  return [
+      reserve1.mul(BigNumber.from(2).pow(112)).div(reserve0).mul(timeElapsed),
+      reserve0.mul(BigNumber.from(2).pow(112)).div(reserve1).mul(timeElapsed)
+  ]
+}
+
+export function addPrice(oldPrice: BigNumber[], addedPrice: BigNumber[]) {
+    return [
+        oldPrice[0].add(addedPrice[0]),
+        oldPrice[1].add(addedPrice[1])
+    ]
+}
+
+export async function waitBlocks(provider: JsonRpcProvider, numBlocks: number): Promise<number> {
+    process.stdout.write(`Waiting ${numBlocks} blocks`)
+
+    return new Promise((resolve) => {
+        let blockCount = 0
+
+        const listener = (blockNumber) => {
+            process.stdout.write('.')
+            blockCount++
+            if (blockCount >= numBlocks) {
+                provider.off('block', listener)
+                console.log()
+                resolve(blockNumber)
+            }
+        }
+
+        provider.on('block', listener)
+    })
 }
