@@ -18,13 +18,6 @@
   resolved "https://registry.yarnpkg.com/@ensdomains/resolver/-/resolver-0.2.4.tgz#c10fe28bf5efbf49bff4666d909aed0265efbc89"
   integrity sha512-bvaTH34PMCbv6anRa9I/0zjLJgY4EuznbEMgbV77JBCQ9KNC46rzi0avuxpOfu+xDjPEtSFGqVEOr5GlUSGudA==
 
-"@eth-optimism/hardhat-ovm@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@eth-optimism/hardhat-ovm/-/hardhat-ovm-0.2.3.tgz#91200f481d47886b4a841b4dd825f9431c8676ef"
-  integrity sha512-QBjAqC7ECl42Oz8qxWGgVOGPvaNdItQwgoBvAd4z9qSt5ghBZFtbwBSf4Ot3Zq3sOZp3FGcjZ6N5eeWn9l6kHQ==
-  dependencies:
-    node-fetch "^2.6.1"
-
 "@eth-optimism/solc@^0.6.12-alpha.1":
   version "0.6.12-alpha.1"
   resolved "https://registry.yarnpkg.com/@eth-optimism/solc/-/solc-0.6.12-alpha.1.tgz#041876f83b34c6afe2f19dfe9626568df6ed8590"
@@ -516,6 +509,13 @@
     "@ethersproject/logger" "^5.4.0"
     "@ethersproject/properties" "^5.4.0"
     "@ethersproject/strings" "^5.4.0"
+
+"@nahmii/hardhat-nvm@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@nahmii/hardhat-nvm/-/hardhat-nvm-0.2.3.tgz#ebf625a2d4bf9dbbe8f9962bf8c118d1c7381254"
+  integrity sha512-/tt5GYp2slJpBIAzpol9PTMt1e367sbLk07uyjbOVs/fDJZogWA90h8gMwfSsab5+A+kHyxGuwZMpWD8gdxpvQ==
+  dependencies:
+    node-fetch "^2.6.1"
 
 "@nomiclabs/hardhat-ethers@^2.0.2":
   version "2.0.2"

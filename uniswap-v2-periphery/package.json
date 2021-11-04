@@ -15,7 +15,7 @@
     "contracts"
   ],
   "dependencies": {
-    "@eth-optimism/hardhat-ovm": "^0.2.3",
+    "@nahmii/hardhat-nvm": "^0.2.3",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@uniswap/lib": "4.0.1-alpha",
@@ -41,9 +41,9 @@
   "scripts": {
     "lint": "yarn prettier ./test/*.ts --check",
     "lint:fix": "yarn prettier ./test/*.ts --write",
-    "clean": "rimraf ./build/ ./artifacts-ovm/",
+    "clean": "rimraf ./build/ ./artifacts-nvm/",
     "copy-v1-artifacts": "ncp ./buildV1 ./build",
-    "copy-ovm-artifacts": "ncp ./artifacts-ovm ./build",
+    "copy-ovm-artifacts": "ncp ./artifacts-nvm ./build",
     "precompile:evm": "yarn clean",
     "precompile:nvm": "yarn clean",
     "compile:evm": "waffle .waffle.json",
