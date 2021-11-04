@@ -1,9 +1,9 @@
 import { Contract, ContractFactory, Wallet } from 'ethers'
 import { expandTo18Decimals } from './utilities'
 
-import ERC20 from '../../artifacts-ovm/contracts/test/ERC20.sol/ERC20.json'
-import NiiFiV1Factory from '../../artifacts-ovm/contracts/NiiFiV1Factory.sol/NiiFiV1Factory.json'
-import NiiFiV1Pair from '../../artifacts-ovm/contracts/NiiFiV1Pair.sol/NiiFiV1Pair.json'
+import ERC20 from '../../artifacts-nvm/contracts/test/ERC20.sol/ERC20.json'
+import NiiFiV1Factory from '../../artifacts-nvm/contracts/NiiFiV1Factory.sol/NiiFiV1Factory.json'
+import NiiFiV1Pair from '../../artifacts-nvm/contracts/NiiFiV1Pair.sol/NiiFiV1Pair.json'
 
 interface FactoryFixture {
   factory: Contract

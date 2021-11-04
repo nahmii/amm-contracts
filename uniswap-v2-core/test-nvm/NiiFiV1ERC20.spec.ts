@@ -13,7 +13,7 @@ import { expandTo18Decimals, getApprovalDigest } from './shared/utilities'
 import { l2Provider, l2ChainId } from './shared/config'
 import { deploy } from './shared/fixtures'
 
-import ERC20 from '../artifacts-ovm/contracts/test/ERC20.sol/ERC20.json'
+import ERC20 from '../artifacts-nvm/contracts/test/ERC20.sol/ERC20.json'
 
 chai.use(solidity)
 

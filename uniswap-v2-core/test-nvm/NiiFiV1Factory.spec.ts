@@ -8,7 +8,7 @@ import { getCreate2Address } from './shared/utilities'
 import { factoryFixture } from './shared/fixtures'
 import { l2Provider } from './shared/config'
 
-import NiiFiV1Pair from '../artifacts-ovm/contracts/NiiFiV1Pair.sol/NiiFiV1Pair.json'
+import NiiFiV1Pair from '../artifacts-nvm/contracts/NiiFiV1Pair.sol/NiiFiV1Pair.json'
 
 chai.use(solidity)
 
