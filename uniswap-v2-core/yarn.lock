@@ -18,13 +18,6 @@
   resolved "https://registry.yarnpkg.com/@ensdomains/resolver/-/resolver-0.2.4.tgz#c10fe28bf5efbf49bff4666d909aed0265efbc89"
   integrity sha512-bvaTH34PMCbv6anRa9I/0zjLJgY4EuznbEMgbV77JBCQ9KNC46rzi0avuxpOfu+xDjPEtSFGqVEOr5GlUSGudA==
 
-"@eth-optimism/hardhat-ovm@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@eth-optimism/hardhat-ovm/-/hardhat-ovm-0.2.3.tgz#91200f481d47886b4a841b4dd825f9431c8676ef"
-  integrity sha512-QBjAqC7ECl42Oz8qxWGgVOGPvaNdItQwgoBvAd4z9qSt5ghBZFtbwBSf4Ot3Zq3sOZp3FGcjZ6N5eeWn9l6kHQ==
-  dependencies:
-    node-fetch "^2.6.1"
-
 "@eth-optimism/solc@0.5.16-alpha.7":
   version "0.5.16-alpha.7"
   resolved "https://registry.yarnpkg.com/@eth-optimism/solc/-/solc-0.5.16-alpha.7.tgz#3767a34715dce6cb342ae66df834cc7ed6d9a6e3"
