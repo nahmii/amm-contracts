@@ -5,10 +5,10 @@ import { expandTo18Decimals } from './utilities'
 import NiiFiV1Factory from '../../../uniswap-v2-core/artifacts-nvm/contracts/NiiFiV1Factory.sol/NiiFiV1Factory.json'
 import INiiFiV1Pair from '../../../uniswap-v2-core/artifacts-nvm/contracts/NiiFiV1Pair.sol/NiiFiV1Pair.json'
 
-import ERC20 from '../../artifacts-ovm/contracts/test/ERC20.sol/ERC20.json'
-import WETH9 from '../../artifacts-ovm/contracts/test/WETH9.sol/WETH9.json'
-import NiiFiV1Router02 from '../../artifacts-ovm/contracts/NiiFiV1Router02.sol/NiiFiV1Router02.json'
-import RouterEventEmitter from '../../artifacts-ovm/contracts/test/RouterEventEmitter.sol/RouterEventEmitter.json'
+import ERC20 from '../../artifacts-nvm/contracts/test/ERC20.sol/ERC20.json'
+import WETH9 from '../../artifacts-nvm/contracts/test/WETH9.sol/WETH9.json'
+import NiiFiV1Router02 from '../../artifacts-nvm/contracts/NiiFiV1Router02.sol/NiiFiV1Router02.json'
+import RouterEventEmitter from '../../artifacts-nvm/contracts/test/RouterEventEmitter.sol/RouterEventEmitter.json'
 
 interface V2Fixture {
   token0: Contract
