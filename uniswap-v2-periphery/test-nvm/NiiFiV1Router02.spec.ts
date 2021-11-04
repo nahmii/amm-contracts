@@ -7,7 +7,7 @@ import { ecsign } from 'ethereumjs-util'
 
 import { expandTo18Decimals, expandToDecimals, getApprovalDigest, mineBlock, MINIMUM_LIQUIDITY } from './shared/utilities'
 import { v2Fixture } from './shared/fixtures'
-import { provider } from './shared/config'
+import { l2Provider } from './shared/config'
 
 chai.use(solidity)
 
@@ -17,7 +17,7 @@ const overrides = {
 
 describe('NiiFiV1Router02', () => {
   //@ts-ignore
-  const [wallet] = provider.getWallets()
+  const [wallet] = l2Provider.getWallets()
 
   let token0: Contract
   let token1: Contract
@@ -29,7 +29,7 @@ describe('NiiFiV1Router02', () => {
   let WETHPair: Contract
   let routerEventEmitter: Contract
   beforeEach(async function() {
-    const fixture = await v2Fixture([wallet], provider)
+    const fixture = await v2Fixture([wallet], l2Provider)
     token0 = fixture.token0
     token1 = fixture.token1
     WETH = fixture.WETH
@@ -42,7 +42,7 @@ describe('NiiFiV1Router02', () => {
   })
 
   afterEach(async function() {
-    expect(await provider.getBalance(router.address)).to.eq(Zero)
+    expect(await l2Provider.getBalance(router.address)).to.eq(Zero)
   })
 
   async function addLiquidity(

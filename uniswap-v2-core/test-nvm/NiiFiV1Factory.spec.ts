@@ -6,7 +6,7 @@ import { solidity } from 'ethereum-waffle'
 
 import { getCreate2Address } from './shared/utilities'
 import { factoryFixture } from './shared/fixtures'
-import { provider } from './shared/config'
+import { l2Provider } from './shared/config'
 
 import NiiFiV1Pair from '../artifacts-ovm/contracts/NiiFiV1Pair.sol/NiiFiV1Pair.json'
 
@@ -19,11 +19,11 @@ const TEST_ADDRESSES: [string, string] = [
 
 describe('NiiFiV1Factory', () => {
   //@ts-ignore
-  const [wallet, other] = provider.getWallets()
+  const [wallet, other] = l2Provider.getWallets()
 
   let factory: Contract
   beforeEach(async () => {
-    const fixture = await factoryFixture([wallet], provider)
+    const fixture = await factoryFixture([wallet], l2Provider)
     factory = fixture.factory
   })
 
@@ -47,7 +47,7 @@ describe('NiiFiV1Factory', () => {
     expect(await factory.allPairs(0)).to.eq(create2Address)
     expect(await factory.allPairsLength()).to.eq(1)
 
-    const pair = new Contract(create2Address, JSON.stringify(NiiFiV1Pair.abi), provider)
+    const pair = new Contract(create2Address, JSON.stringify(NiiFiV1Pair.abi), l2Provider)
     expect(await pair.factory()).to.eq(factory.address)
     expect(await pair.token0()).to.eq(TEST_ADDRESSES[0])
     expect(await pair.token1()).to.eq(TEST_ADDRESSES[1])

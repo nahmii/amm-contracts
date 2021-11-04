@@ -10,7 +10,7 @@ import { solidity } from 'ethereum-waffle'
 import { ecsign } from 'ethereumjs-util'
 
 import { expandTo18Decimals, getApprovalDigest } from './shared/utilities'
-import { provider, chainId } from './shared/config'
+import { l2Provider, l2ChainId } from './shared/config'
 import { deploy } from './shared/fixtures'
 
 import ERC20 from '../artifacts-ovm/contracts/test/ERC20.sol/ERC20.json'
@@ -22,7 +22,7 @@ const TEST_AMOUNT = expandTo18Decimals(10)
 
 describe('NiiFiV1ERC20', () => {
   //@ts-ignore
-  const [wallet, other] = provider.getWallets()
+  const [wallet, other] = l2Provider.getWallets()
 
   let token: Contract
   beforeEach(async () => {
@@ -46,7 +46,7 @@ describe('NiiFiV1ERC20', () => {
             ),
             keccak256(toUtf8Bytes(name)),
             keccak256(toUtf8Bytes('1')),
-            chainId,
+            l2ChainId,
             token.address
           ]
         )

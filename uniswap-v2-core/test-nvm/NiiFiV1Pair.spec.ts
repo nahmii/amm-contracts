@@ -6,7 +6,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { expandTo18Decimals, encodePrice, addPrice, waitBlocks } from './shared/utilities'
 import { pairFixture } from './shared/fixtures'
 import { AddressZero } from '@ethersproject/constants'
-import { l1Provider, provider } from './shared/config'
+import { l1Provider, l2Provider } from './shared/config'
 
 const MINIMUM_LIQUIDITY = BigNumber.from(10).pow(3)
 
@@ -20,14 +20,14 @@ const overrides = {
 
 describe('NiiFiV1Pair', () => {
   //@ts-ignore
-  const [wallet, other] = provider.getWallets()
+  const [wallet, other] = l2Provider.getWallets()
 
   let factory: Contract
   let token0: Contract
   let token1: Contract
   let pair: Contract
   beforeEach(async () => {
-    const fixture = await pairFixture([wallet], provider)
+    const fixture = await pairFixture([wallet], l2Provider)
     factory = fixture.factory
     token0 = fixture.token0
     token1 = fixture.token1
@@ -63,8 +63,7 @@ describe('NiiFiV1Pair', () => {
   async function addLiquidity(token0Amount: BigNumber, token1Amount: BigNumber) {
     await token0.transfer(pair.address, token0Amount)
     await token1.transfer(pair.address, token1Amount)
-    const tx = await pair.mint(wallet.address, overrides)
-    await tx.wait()
+    await pair.mint(wallet.address, overrides)
   }
   const swapTestCases: BigNumber[][] = [
     [1, 5, 10, '1662497915624478906'],
@@ -211,7 +210,7 @@ describe('NiiFiV1Pair', () => {
     const token1Amount = expandTo18Decimals(3)
     await addLiquidity(token0Amount, token1Amount)
 
-    let blockTimestamp = (await provider.getBlock('latest')).timestamp
+    let blockTimestamp = (await l2Provider.getBlock('latest')).timestamp
     const [, , timeStamp1] = await pair.getReserves()
     expect(timeStamp1).to.eq(blockTimestamp)
 
@@ -220,10 +219,9 @@ describe('NiiFiV1Pair', () => {
 
     await waitBlocks(l1Provider, 5)
 
-    let tx = await pair.sync()
-    await tx.wait()
+    await pair.sync(overrides)
 
-    blockTimestamp = (await provider.getBlock('latest')).timestamp
+    blockTimestamp = (await l2Provider.getBlock('latest')).timestamp
     const [, , timeStamp2] = await pair.getReserves()
     expect(timeStamp2).to.eq(blockTimestamp)
 
@@ -234,13 +232,11 @@ describe('NiiFiV1Pair', () => {
     await waitBlocks(l1Provider, 5)
 
     const swapAmount = expandTo18Decimals(3)
-    tx = await token0.transfer(pair.address, swapAmount)
-    await tx.wait()
+    await token0.transfer(pair.address, swapAmount)
     // swap to a new price eagerly instead of syncing
-    tx = await pair.swap(0, expandTo18Decimals(1), wallet.address, '0x', overrides) // make the price nice
-    await tx.wait()
+    await pair.swap(0, expandTo18Decimals(1), wallet.address, '0x', overrides) // make the price nice
 
-    blockTimestamp = (await provider.getBlock('latest')).timestamp
+    blockTimestamp = (await l2Provider.getBlock('latest')).timestamp
     const [, , timeStamp3] = await pair.getReserves()
     expect(timeStamp3).to.eq(blockTimestamp)
 
@@ -250,10 +246,9 @@ describe('NiiFiV1Pair', () => {
 
     await waitBlocks(l1Provider, 5)
 
-    tx = await pair.sync()
-    await tx.wait()
+    await pair.sync(overrides)
 
-    blockTimestamp = (await provider.getBlock('latest')).timestamp
+    blockTimestamp = (await l2Provider.getBlock('latest')).timestamp
     const [, , timeStamp4] = await pair.getReserves()
     expect(timeStamp4).to.eq(blockTimestamp)
 

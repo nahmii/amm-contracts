@@ -6,7 +6,7 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { keccak256 } from '@ethersproject/keccak256'
 import { toUtf8Bytes } from '@ethersproject/strings'
 import { pack as solidityPack } from '@ethersproject/solidity'
-import { chainId } from './config'
+import { l2ChainId } from './config'
 
 export const MINIMUM_LIQUIDITY = BigNumber.from(10).pow(3)
 
@@ -30,7 +30,7 @@ function getDomainSeparator(name: string, tokenAddress: string) {
         keccak256(toUtf8Bytes('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)')),
         keccak256(toUtf8Bytes(name)),
         keccak256(toUtf8Bytes('1')),
-        chainId,
+        l2ChainId,
         tokenAddress
       ]
     )

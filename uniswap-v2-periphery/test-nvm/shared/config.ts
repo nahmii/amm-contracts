@@ -3,19 +3,19 @@ require('dotenv').config();
 
 const config = {
   l2Url: process.env.L2_URL || 'http://127.0.0.1:8545',
-  privateKey: process.env.PRIVATE_KEY,
-  chainId: ethers.BigNumber.from(process.env.CHAIN_ID || 555)
+  l2ChainId: ethers.BigNumber.from(process.env.L2_CHAIN_ID || 555),
+  privateKey: process.env.PRIVATE_KEY
 }
 
-const provider = new ethers.providers.JsonRpcProvider(config.l2Url)
-provider.getGasPrice = async () => ethers.BigNumber.from(0)
+const l2Provider = new ethers.providers.JsonRpcProvider(config.l2Url)
+l2Provider.getGasPrice = async () => ethers.BigNumber.from(0)
 //@ts-ignore
-provider.getWallets = () => {
+l2Provider.getWallets = () => {
   return [
-    new ethers.Wallet(config.privateKey as string).connect(provider),
+    new ethers.Wallet(config.privateKey as string).connect(l2Provider),
   ]
 }
 
-const chainId = config.chainId
+const l2ChainId = config.l2ChainId
 
-export { provider, chainId }
+export { l2Provider, l2ChainId }

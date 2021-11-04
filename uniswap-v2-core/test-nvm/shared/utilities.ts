@@ -5,7 +5,7 @@ import { getAddress } from '@ethersproject/address'
 import { keccak256 } from '@ethersproject/keccak256'
 import { pack as solidityPack } from '@ethersproject/solidity'
 import { toUtf8Bytes } from '@ethersproject/strings'
-import { chainId } from './config'
+import { l2ChainId } from './config'
 import { JsonRpcProvider } from "@ethersproject/providers/src.ts/json-rpc-provider";
 
 const PERMIT_TYPEHASH = keccak256(
@@ -24,7 +24,7 @@ function getDomainSeparator(name: string, tokenAddress: string) {
         keccak256(toUtf8Bytes('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)')),
         keccak256(toUtf8Bytes(name)),
         keccak256(toUtf8Bytes('1')),
-        chainId,
+        l2ChainId,
         tokenAddress
       ]
     )

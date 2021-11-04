@@ -30,7 +30,7 @@ EVM compiler:
 NVM compiler:
 `yarn test:nvm`
 
-`yarn test:nvm` tests against a nahmii instance, either local or the testnet cluster. So please make sure the environment variables are set properly in the `.env` file. To test against the remote testnet, please set L2_URL to _https://l2.testnet.nahmii.io_ and CHAIN_ID to _5553_.
+`yarn test:nvm` tests against a nahmii instance, either local or the testnet cluster. So please make sure the environment variables are set properly in the `.env` file. To test against the remote testnet, please set L2_URL to _https://l2.testnet.nahmii.io_ and L2_CHAIN_ID to _5553_.
 
 Keep in mind that the remote testnet would require your test wallet address, corresponding to the PRIVATE_KEY or MNEMONIC environment variables, to be whitelisted in order to deploy contracts. 
 
