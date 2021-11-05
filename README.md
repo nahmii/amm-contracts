@@ -42,3 +42,7 @@ The `NiiFiV1Library` contract depends on the hash of the `NiiFiV1Pair` contract.
 
 
 ### Nahmii Mainnet
+
+- Factory: 0xe3DcF89D0c90A877cD82283EdFA7C3Bd03e77E86
+- INIT_CODE_HASH: 0x0afcd21f90e27818df9c484881aac8a20b869cbd86156c655d2020ef6950a5ba
+- Router02: 0x01dF38E20738c58aF8141504aa6C88013d3D6C5A
