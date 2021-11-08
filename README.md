@@ -32,17 +32,25 @@ The `NiiFiV1Library` contract depends on the hash of the `NiiFiV1Pair` contract.
 
 ### Nahmii Testnet
 
-- Factory: 0x11AB0Ca40B2E9Bf2c98718539cA1aD7486999E57
+- Factory: [0x11AB0Ca40B2E9Bf2c98718539cA1aD7486999E57](https://explorer.testnet.nahmii.io/address/0x11AB0Ca40B2E9Bf2c98718539cA1aD7486999E57)
 - INIT_CODE_HASH: 0x0afcd21f90e27818df9c484881aac8a20b869cbd86156c655d2020ef6950a5ba
-- Router02: 0x38b5890E36cbc164A677d6A6192A39E8Fa9EcDf4
-- NEURO: 0xB59C984a529490fde6698702342b292840743bb8
-- NUSD: 0xab151cD390C6b0eB41A4a45E1E372972C3067b1a
-- NEURO-NUSD pair: 0x136ff75c58BAa3c30d282fBbFaEC4A5C9A4B0226
-- NEURO-ETH pair: 0x1450f8e037D7275ed2aE467af356603521251a13 
+- Router02: [0x38b5890E36cbc164A677d6A6192A39E8Fa9EcDf4](https://explorer.testnet.nahmii.io/address/0x38b5890E36cbc164A677d6A6192A39E8Fa9EcDf4)
+- NEURO: [0xB59C984a529490fde6698702342b292840743bb8](https://explorer.testnet.nahmii.io/address/0xB59C984a529490fde6698702342b292840743bb8)
+- NUSD: [0xab151cD390C6b0eB41A4a45E1E372972C3067b1a](https://explorer.testnet.nahmii.io/address/0xab151cD390C6b0eB41A4a45E1E372972C3067b1a)
+- NEURO-NUSD pair: [0x136ff75c58BAa3c30d282fBbFaEC4A5C9A4B0226](https://explorer.testnet.nahmii.io/address/0x136ff75c58BAa3c30d282fBbFaEC4A5C9A4B0226)
+- NEURO-ETH pair: [0x1450f8e037D7275ed2aE467af356603521251a13](https://explorer.testnet.nahmii.io/address/0x1450f8e037D7275ed2aE467af356603521251a13)
 
 
 ### Nahmii Mainnet
 
-- Factory: 0xe3DcF89D0c90A877cD82283EdFA7C3Bd03e77E86
+- Factory: [0xe3DcF89D0c90A877cD82283EdFA7C3Bd03e77E86](https://explorer.nahmii.io/address/0xe3DcF89D0c90A877cD82283EdFA7C3Bd03e77E86)
 - INIT_CODE_HASH: 0x0afcd21f90e27818df9c484881aac8a20b869cbd86156c655d2020ef6950a5ba
-- Router02: 0x01dF38E20738c58aF8141504aa6C88013d3D6C5A
+- Router02: [0x01dF38E20738c58aF8141504aa6C88013d3D6C5A](https://explorer.nahmii.io/address/0x01dF38E20738c58aF8141504aa6C88013d3D6C5A)
+
+## Verify contracts
+
+To verify the validity of our contracts against the live versions procede with the following steps:
+- Compile the contracts for the NVM compiler target.
+- Retrieve the bytecode from the contract you want to test against by finding said contracts JSON in the `artifacts-nvm` folder.
+- Navigate to one of the above mentioned addresses on our block explorer and copy the bytecode.
+- Compare the bytecode either by replacement or using a diffing tool.
