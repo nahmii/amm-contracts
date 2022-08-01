@@ -6,7 +6,7 @@ name: niifi-v1-core
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [ "main" ]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 env:
@@ -16,6 +16,9 @@ env:
 jobs:
   build-and-push-to-ecr:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: niifi-v1-core
     steps:
       - uses: actions/checkout@v2
       - name: Configure AWS credentials
