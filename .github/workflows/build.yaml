@@ -2,12 +2,15 @@ name: Docker Build CI
 
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
   pull_request:
-    branches: ["master"]
+    branches: ["main"]
 
 jobs:
   build-docker:
+    defaults:
+      run:
+        working-directory: niifi-v1-core
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
