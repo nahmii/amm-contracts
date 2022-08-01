@@ -1,0 +1,7 @@
+artifact*
+cache*
+node_modules
+typechain
+*.log
+.git
+.env
