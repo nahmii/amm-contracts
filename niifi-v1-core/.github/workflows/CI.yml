@@ -1,37 +1,47 @@
-name: CI
+# This is a basic workflow to help you get started with Actions
 
+name: niifi-v1-core
+
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches:
-      - master
-  pull_request:
-
+    branches: [ master ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+env:
+  IMAGE_TAG: ${{ github.sha }}
+  ECR_REPOSITORY: niifi-v1-core
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  test:
-    strategy:
-      matrix:
-        node: ['10.x', '12.x']
-        os: [ubuntu-latest]
-
-    runs-on: ${{ matrix.os }}
-
+  build-and-push-to-ecr:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          node-version: ${{ matrix.node }}
-
-      - run: npm install -g yarn
-
-      - id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+          aws-access-key-id: ${{ secrets.PRODUCTS_ECR_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PRODUCTS_ECR_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY -a
+      - name: Send Slack Notification
+        id: slack
+        uses: slackapi/slack-github-action@v1.18.0
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ matrix.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ matrix.os }}-yarn-
-
-      - run: yarn
-      - run: yarn lint
-      - run: yarn test
+          # This data can be any valid JSON from a previous step in the GitHub Action
+          payload: |
+            {
+              "repository": "${{github.repository}}",
+              "docker_tag": "${{env.IMAGE_TAG}}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFY_WEBHOOK }}
