@@ -37,8 +37,8 @@ module.exports = {
         nahmii: {
             url: process.env.L2_URL,
             accounts,
-            gasPrice: 15000000,
-            gas: 9000000,
+            gasPrice: ( process.env.GAS_PRICE || 15000000 ),
+            gas: ( process.env.GAS || 9000000 ),
             nvm: true
         }
     },
