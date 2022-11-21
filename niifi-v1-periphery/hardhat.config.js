@@ -37,12 +37,8 @@ module.exports = {
         nahmii: {
             url: process.env.L2_URL,
             accounts,
-            gasPrice: parseInt(process.env.GAS_PRICE) || 15000000,
-            gas: 9000000,
-            nvm: true
+            // gasPrice: parseInt(process.env.GAS_PRICE) || 15000000,
+            // gas: 9000000,
         }
-    },
-    ovm: {
-        solcVersion: '0.6.12'
     }
 };
