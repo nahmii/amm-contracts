@@ -39,10 +39,6 @@ module.exports = {
             accounts,
             gasPrice: parseInt(process.env.GAS_PRICE) || 15000000,
             gas: 27000000,
-            nvm: true
         }
     },
-    ovm: {
-        solcVersion: '0.5.16'
-    }
 };
