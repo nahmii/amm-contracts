@@ -39,10 +39,6 @@ module.exports = {
             accounts,
             gasPrice: ( process.env.GAS_PRICE || 15000000 ),
             gas: ( process.env.GAS || 9000000 ),
-            nvm: true
         }
-    },
-    ovm: {
-        solcVersion: '0.6.12'
     }
 };
